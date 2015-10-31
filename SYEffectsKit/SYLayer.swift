@@ -13,12 +13,15 @@ public enum SYLayerAnimation {
     case BorderWithLight
     case Background
     case Text
+    case Ripple
 }
 
 public class SYLayer {
     
     private var superLayer: CALayer!
     private var textLayer = CATextLayer()
+    private var rippleLayer = CALayer()
+    private var subRippleLayer = CALayer()
     
     private var borderColorAnimtion = CABasicAnimation()
     private var borderWidthAnimation = CABasicAnimation()
@@ -100,6 +103,50 @@ public class SYLayer {
         self.superLayer.borderWidth = self.borderWidth
         
         self.clearSuperLayerShadow()
+        self.setRippleLayer()
+    }
+    
+    private func setRippleLayer() {
+        let superLayerHeight = CGRectGetHeight(self.superLayer.frame)
+        
+        let rippleDiameter: CGFloat = superLayerHeight * 0.75
+        let rippleCornerRadius: CGFloat = rippleDiameter / 2
+        
+        self.rippleLayer.backgroundColor = UIColor.lightGrayColor().CGColor
+        self.rippleLayer.opacity = 0.0
+        self.rippleLayer.cornerRadius = rippleCornerRadius
+        self.rippleLayer.frame = CGRect(x: (self.superLayer.bounds.width - rippleDiameter) / 2, y: (self.superLayer.bounds.height - rippleDiameter) / 2, width: rippleDiameter, height: rippleDiameter)
+        self.superLayer.addSublayer(self.rippleLayer)
+        
+        let subRippleDiameter: CGFloat = superLayerHeight * 0.85
+        let subRippleCornerRadius: CGFloat = subRippleDiameter / 2
+        
+        self.subRippleLayer.borderColor = UIColor.lightGrayColor().CGColor
+        self.subRippleLayer.opacity = 0.0
+        self.subRippleLayer.borderWidth = 1
+        self.subRippleLayer.backgroundColor = UIColor.clearColor().CGColor
+        self.subRippleLayer.cornerRadius = subRippleCornerRadius
+        self.subRippleLayer.frame = CGRect(x: (self.superLayer.bounds.width - subRippleDiameter) / 2, y: (self.superLayer.bounds.height - subRippleDiameter) / 2, width: subRippleDiameter, height: subRippleDiameter)
+        self.superLayer.addSublayer(self.subRippleLayer)
+        
+    }
+    
+    public func resizeSuperLayer(frame: CGRect) {
+        self.superLayer.frame = frame
+        
+        let superLayerHeight = CGRectGetHeight(self.superLayer.frame)
+        
+        let rippleDiameter: CGFloat = superLayerHeight * 0.75
+        let rippleCornerRadius: CGFloat = rippleDiameter / 2
+        
+        self.rippleLayer.frame = CGRect(x: (self.superLayer.bounds.width - rippleDiameter) / 2, y: (self.superLayer.bounds.height - rippleDiameter) / 2, width: rippleDiameter, height: rippleDiameter)
+        self.rippleLayer.cornerRadius = rippleCornerRadius
+        
+        let subRippleDiameter: CGFloat = superLayerHeight * 0.9
+        let subRippleCornerRadius: CGFloat = subRippleDiameter / 2
+        
+        self.subRippleLayer.cornerRadius = subRippleCornerRadius
+        self.subRippleLayer.frame = CGRect(x: (self.superLayer.bounds.width - subRippleDiameter) / 2, y: (self.superLayer.bounds.height - subRippleDiameter) / 2, width: subRippleDiameter, height: subRippleDiameter)
     }
     
     public func setTextLayer(textLayer: CATextLayer) {
@@ -171,12 +218,16 @@ public class SYLayer {
             self.animateBackground()
         case .Text:
             self.animateText()
+        case .Ripple:
+            self.animateRipple()
         }
     }
     
     public func stopAnimation() {
         self.superLayer.removeAllAnimations()
         self.textLayer.removeAllAnimations()
+        self.subRippleLayer.removeAllAnimations()
+        self.rippleLayer.removeAllAnimations()
         
         self.clearSuperLayerShadow()
         self.superLayer.backgroundColor = self.backgroundColor.CGColor
@@ -225,6 +276,26 @@ public class SYLayer {
         self.textColorAnimation.toValue = self.animationTextColor.CGColor
         self.textLayer.foregroundColor = self.animationTextColor.CGColor
         self.textLayer.addAnimation(textColorAnimation, forKey: "TextColor")
+    }
+    
+    private func animateRipple() {
+        let fadeOutOpacity = CABasicAnimation(keyPath: "opacity")
+        fadeOutOpacity.fromValue = 1.0
+        fadeOutOpacity.toValue = 0.0
+        
+        let scale = CABasicAnimation(keyPath: "transform.scale")
+        scale.fromValue = 0.4
+        scale.toValue = 1.0
+        
+        let animationGroup = CAAnimationGroup()
+        animationGroup.duration = self.animationDuration
+        //        animationGroup.fillMode = kCAFillModeForwards
+//        animationGroup.removedOnCompletion = false
+        animationGroup.repeatCount = 1e100
+        animationGroup.animations = [fadeOutOpacity, scale]
+        
+        self.rippleLayer.addAnimation(animationGroup, forKey: nil)
+        self.subRippleLayer.addAnimation(animationGroup, forKey: nil)
     }
     
     

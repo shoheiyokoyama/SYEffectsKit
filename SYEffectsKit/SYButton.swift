@@ -13,6 +13,7 @@ public enum SYButtonAnimation {
     case BorderWithLight
     case Background
     case Text
+    case Ripple
 }
 
 public class SYButton: UIButton {
@@ -42,6 +43,12 @@ public class SYButton: UIButton {
         self.syLayer.textColor = color!
     }
     
+    override public var frame: CGRect {
+        didSet {
+            self.syLayer.resizeSuperLayer(self.frame)
+        }
+    }
+    
     public override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -56,7 +63,7 @@ public class SYButton: UIButton {
         self.layer.cornerRadius = 5.0
         self.contentEdgeInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
         
-        self.syLayer.syLayerAnimation = .Text// Default Animation
+        self.syLayer.syLayerAnimation = .Ripple // Default Animation
     }
     
     private func setTextLayer() {
@@ -97,6 +104,8 @@ public class SYButton: UIButton {
                 self.syLayer.syLayerAnimation = .Background
             case .Text:
                 self.syLayer.syLayerAnimation = .Text
+            case .Ripple:
+                self.syLayer.syLayerAnimation = .Ripple
             }
         }
     }
