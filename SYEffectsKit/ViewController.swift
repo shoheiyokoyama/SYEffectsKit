@@ -34,12 +34,13 @@ class ViewController: UIViewController {
     }
     
     private func setup() {
-        self.view.backgroundColor = UIColor.ChestnutRose()
+        self.view.backgroundColor = UIColor.whiteColor()
         
         self.borderAnimationButton.frame = CGRectMake(120, 70, 150, 40)
         self.borderAnimationButton.setTitle("Border", forState: .Normal)
         self.borderAnimationButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
         self.borderAnimationButton.buttonColor = UIColor.clearColor()
+        self.borderAnimationButton.animationBorderColor = UIColor.SunsetOrange()
         self.borderAnimationButton.addTarget(self, action: "borderAnimation:", forControlEvents: .TouchUpInside)
         self.borderAnimationButton.syButtonAnimation = .Border
         self.view.addSubview(self.borderAnimationButton)
@@ -63,7 +64,7 @@ class ViewController: UIViewController {
         self.textAnimationButton.frame = CGRectMake(120, 220, 150, 40)
         self.textAnimationButton.setTitle("Text", forState: .Normal)
         self.textAnimationButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
-        self.textAnimationButton.buttonColor = UIColor.ChestnutRose()
+        self.textAnimationButton.buttonColor = UIColor.AliceBlue()
         self.textAnimationButton.addTarget(self, action: "textAnimation:", forControlEvents: .TouchUpInside)
         self.textAnimationButton.syButtonAnimation = .Text
         self.view.addSubview(self.textAnimationButton)
@@ -71,7 +72,7 @@ class ViewController: UIViewController {
         self.rippleAnimationButton.frame = CGRectMake(120, 270, 150, 40)
         self.rippleAnimationButton.setTitle("Ripple", forState: .Normal)
         self.rippleAnimationButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
-        self.rippleAnimationButton.buttonColor = UIColor.clearColor()
+        self.rippleAnimationButton.buttonColor = UIColor.AquaIsland()
         self.rippleAnimationButton.addTarget(self, action: "rippleAnimation:", forControlEvents: .TouchUpInside)
         self.rippleAnimationButton.syButtonAnimation = .Ripple
         self.view.addSubview(self.rippleAnimationButton)

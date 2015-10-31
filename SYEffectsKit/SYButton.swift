@@ -27,6 +27,12 @@ public class SYButton: UIButton {
         }
     }
     
+    public var animationBorderColor = UIColor.blackColor() {
+        didSet {
+            self.syLayer.animationBorderColor = self.animationBorderColor
+        }
+    }
+    
     public lazy var syLayer: SYLayer = SYLayer(superLayer: self.layer)
     
     override public func setTitle(title: String?, forState state: UIControlState) {
