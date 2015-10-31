@@ -29,9 +29,9 @@ class ViewController: UIViewController {
         self.view.backgroundColor = UIColor.whiteColor()
         
         button.frame = CGRectMake(90, 500, 170, 50)
-        button.setTitle("TEXT", forState: .Normal)
+        button.setTitle("TEXTTA", forState: .Normal)
         button.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        button.buttonColor = UIColor.redColor()
+//        button.buttonColor = UIColor.redColor()
         button.addTarget(self, action: "onClickButton:", forControlEvents: .TouchUpInside)
         self.view.addSubview(button)
     }

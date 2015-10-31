@@ -12,9 +12,12 @@ public enum SYButtonAnimation {
     case Border
     case BorderWithLight
     case Background
+    case Text
 }
 
 public class SYButton: UIButton {
+    
+    private let textLayer = CATextLayer()
     
     public var buttonColor: UIColor = UIColor.clearColor() {
         didSet {
@@ -24,6 +27,20 @@ public class SYButton: UIButton {
     }
     
     public lazy var syLayer: SYLayer = SYLayer(superLayer: self.layer)
+    
+    override public func setTitle(title: String?, forState state: UIControlState) {
+        super.setTitle(title, forState: state)
+        
+        self.setTitleColor(UIColor.redColor(), forState: state)
+        self.setTextLayer()
+    }
+    
+    override public func setTitleColor(color: UIColor?, forState state: UIControlState) {
+        super.setTitleColor(UIColor.clearColor(), forState: state)
+        
+        self.textLayer.foregroundColor = color?.CGColor
+        self.syLayer.textColor = color!
+    }
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,7 +56,34 @@ public class SYButton: UIButton {
         self.layer.cornerRadius = 5.0
         self.contentEdgeInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
         
-        self.syLayer.syLayerAnimation = .Background// Default Animation
+        self.syLayer.syLayerAnimation = .Text// Default Animation
+    }
+    
+    private func setTextLayer() {
+        let font = UIFont.systemFontOfSize(17.0)
+        let text = self.currentTitle
+        
+        var attributes = [String: AnyObject]()
+        attributes[NSFontAttributeName] = font
+        let size = text!.sizeWithAttributes(attributes)
+        
+        let x = (CGRectGetWidth(self.frame) - size.width) / 2
+        let y = (CGRectGetHeight(self.frame) - size.height) / 2
+        let height = size.height + self.layer.borderWidth
+        let width = size.width
+        let frame = CGRectMake(x, y, width, height)
+        
+        self.textLayer.font = self.titleLabel?.font
+        self.textLayer.string = text
+        self.textLayer.fontSize = font.pointSize
+        
+        self.textLayer.foregroundColor = UIColor.blueColor().CGColor
+        self.textLayer.contentsScale = UIScreen.mainScreen().scale
+        
+        self.textLayer.frame = frame
+        self.textLayer.alignmentMode = kCAAlignmentCenter
+        
+        self.syLayer.setTextLayer(textLayer)
     }
     
     public var syButtonAnimation: SYButtonAnimation = .Border {
@@ -51,6 +95,8 @@ public class SYButton: UIButton {
                 self.syLayer.syLayerAnimation = .BorderWithLight
             case .Background:
                 self.syLayer.syLayerAnimation = .Background
+            case .Text:
+                self.syLayer.syLayerAnimation = .Text
             }
         }
     }

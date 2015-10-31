@@ -18,11 +18,13 @@ public enum SYLayerAnimation {
 public class SYLayer {
     
     private var superLayer: CALayer!
+    private var textLayer = CATextLayer()
     
     private var borderColorAnimtion = CABasicAnimation()
     private var borderWidthAnimation = CABasicAnimation()
     private var shadowAnimation = CABasicAnimation()
     private var backgroundColorAnimation = CABasicAnimation()
+    private var textColorAnimation = CABasicAnimation()
     
     public var animationBorderColor = UIColor.blackColor() {
         didSet {
@@ -30,13 +32,14 @@ public class SYLayer {
             self.animationShadowColor = animationBorderColor
         }
     }
-    public var animationTextColor = UIColor.blackColor() {
+    public var animationTextColor = UIColor.redColor() {
         didSet {
+            self.textColorAnimation.toValue = self.animationTextColor.CGColor
         }
     }
     public var animationBackgroundColor = UIColor.blackColor() {
         didSet {
-            backgroundColorAnimation.toValue = self.animationBackgroundColor.CGColor
+            self.backgroundColorAnimation.toValue = self.animationBackgroundColor.CGColor
         }
     }
     public var animationShadowColor = UIColor.blackColor() {
@@ -99,6 +102,11 @@ public class SYLayer {
         self.clearSuperLayerShadow()
     }
     
+    public func setTextLayer(textLayer: CATextLayer) {
+        self.textLayer = textLayer
+        self.superLayer.addSublayer(self.textLayer)
+    }
+    
     private func clearSuperLayerShadow() {
         self.superLayer.shadowOffset = CGSize(width: 0.0, height: 0.0)
         self.superLayer.shadowRadius = 0.0
@@ -116,8 +124,7 @@ public class SYLayer {
                 return
                 
             }
-            
-            
+
         }
     }
     
@@ -155,6 +162,7 @@ public class SYLayer {
     
     public func startAnimation() {
         switch syLayerAnimation {
+            
         case .Border:
             self.animateBorderOrBorderWithLight()
         case .BorderWithLight:
@@ -162,15 +170,17 @@ public class SYLayer {
         case .Background:
             self.animateBackground()
         case .Text:
-            return
+            self.animateText()
         }
     }
     
     public func stopAnimation() {
         self.superLayer.removeAllAnimations()
+        self.textLayer.removeAllAnimations()
         
         self.clearSuperLayerShadow()
         self.superLayer.backgroundColor = self.backgroundColor.CGColor
+        self.textLayer.foregroundColor = self.textColor.CGColor
     }
     
     public func animateBorderOrBorderWithLight() {
@@ -204,6 +214,17 @@ public class SYLayer {
         self.backgroundColorAnimation.repeatCount = 1e100
         self.backgroundColorAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
         self.superLayer.addAnimation(backgroundColorAnimation, forKey: "Background")
+    }
+    
+    private func animateText() {
+        self.textColorAnimation = CABasicAnimation(keyPath: "foregroundColor")
+        self.textColorAnimation.duration = self.animationDuration
+        self.textColorAnimation.autoreverses = true
+        self.textColorAnimation.repeatCount = 1e100
+        self.textColorAnimation.fromValue = UIColor.clearColor().CGColor
+        self.textColorAnimation.toValue = self.animationTextColor.CGColor
+        self.textLayer.foregroundColor = self.animationTextColor.CGColor
+        self.textLayer.addAnimation(textColorAnimation, forKey: "TextColor")
     }
     
     
