@@ -76,5 +76,43 @@ extension UIColor {
         return UIColor(red: 162/255.0, green: 222/255.0, blue: 208/255.0, alpha: 1)
     }
     
+    class func Gossip() -> UIColor {
+        return UIColor(red: 135/255.0, green: 211/255.0, blue: 124/255.0, alpha: 1)
+    }
     
+    class func DarkseaGreen() -> UIColor {
+        return UIColor(red: 144/255.0, green: 198/255.0, blue: 149/255.0, alpha: 1)
+    }
+    
+    class func CaribbBeanGreen() -> UIColor {
+        return UIColor(red: 3/255.0, green: 201/255.0, blue: 169/255.0, alpha: 1)
+    }
+    
+    class func SilverTree() -> UIColor {
+        return UIColor(red: 104/255.0, green: 195/255.0, blue: 163/255.0, alpha: 1)
+    }
+    
+    class func CreamCan() -> UIColor {
+        return UIColor(red: 245/255.0, green: 215/255.0, blue: 110/255.0, alpha: 1)
+    }
+    
+    class func Confetti() -> UIColor {
+        return UIColor(red: 233/255.0, green: 212/255.0, blue: 96/255.0, alpha: 1)
+    }
+    
+    class func CapeHoney() -> UIColor {
+        return UIColor(red: 253/255.0, green: 227/255.0, blue: 167/255.0, alpha: 1)
+    }
+    
+    class func California() -> UIColor {
+        return UIColor(red: 248/255.0, green: 148/255.0, blue: 6/255.0, alpha: 1)
+    }
+    
+    class func WhiteSmoke() -> UIColor {
+        return UIColor(red: 236/255.0, green: 236/255.0, blue: 236/255.0, alpha: 1)
+    }
+    
+    class func Lynch() -> UIColor {
+        return UIColor(red: 108/255.0, green: 122/255.0, blue: 137/255.0, alpha: 1)
+    }
 }
