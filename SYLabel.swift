@@ -64,10 +64,6 @@ public class SYLabel: UILabel {
         }
     }
     
-//    override public var textColor = UIColor! {
-//        
-//    }
-    
     public lazy var syLayer: SYLayer = SYLayer(superLayer: self.layer)
     
     public override init(frame: CGRect) {

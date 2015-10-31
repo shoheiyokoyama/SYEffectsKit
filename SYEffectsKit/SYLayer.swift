@@ -197,14 +197,12 @@ public class SYLayer {
         borderColorAnimtion = CABasicAnimation(keyPath: "borderColor")
         borderColorAnimtion.fromValue = UIColor.clearColor().CGColor
         borderColorAnimtion.toValue = self.animationBorderColor.CGColor
-//        self.superLayer.borderColor = self.animationBorderColor.CGColor
     }
     
     private func setBorderWidthAnimation(fromValue: CGFloat, toValue: CGFloat) {
         borderWidthAnimation = CABasicAnimation(keyPath: "borderWidth")
         borderWidthAnimation.fromValue = fromValue
         borderWidthAnimation.toValue = toValue
-//        self.superLayer.borderWidth = toValue
     }
     
     private func setShadowAnimation(fromValue: Float, toValue: Float) {
@@ -260,9 +258,6 @@ public class SYLayer {
     }
     
     private func animateBackground() {
-//        self.clearSupeLayerBorder()
-//        self.clearSuperLayerShadow()
-        
         self.backgroundColorAnimation = CABasicAnimation(keyPath: "backgroundColor")
         self.backgroundColorAnimation.fromValue = UIColor.clearColor().CGColor
         self.backgroundColorAnimation.toValue = self.animationBackgroundColor.CGColor
@@ -296,8 +291,6 @@ public class SYLayer {
         
         let animationGroup = CAAnimationGroup()
         animationGroup.duration = self.animationDuration
-        //        animationGroup.fillMode = kCAFillModeForwards
-//        animationGroup.removedOnCompletion = false
         animationGroup.repeatCount = 1e100
         animationGroup.animations = [fadeOutOpacity, scale]
         
