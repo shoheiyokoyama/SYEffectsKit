@@ -34,7 +34,7 @@ class ViewController: UIViewController {
     }
     
     private func setup() {
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.ChestnutRose()
         
         self.borderAnimationButton.frame = CGRectMake(120, 70, 150, 40)
         self.borderAnimationButton.setTitle("Border", forState: .Normal)
@@ -63,7 +63,7 @@ class ViewController: UIViewController {
         self.textAnimationButton.frame = CGRectMake(120, 220, 150, 40)
         self.textAnimationButton.setTitle("Text", forState: .Normal)
         self.textAnimationButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
-        self.textAnimationButton.buttonColor = UIColor.clearColor()
+        self.textAnimationButton.buttonColor = UIColor.ChestnutRose()
         self.textAnimationButton.addTarget(self, action: "textAnimation:", forControlEvents: .TouchUpInside)
         self.textAnimationButton.syButtonAnimation = .Text
         self.view.addSubview(self.textAnimationButton)
