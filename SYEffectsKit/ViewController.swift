@@ -49,6 +49,7 @@ class ViewController: UIViewController {
         self.borderWithLightAnimationButton.setTitle("BorderWithLight", forState: .Normal)
         self.borderWithLightAnimationButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
         self.borderWithLightAnimationButton.buttonColor = UIColor.clearColor()
+        self.borderWithLightAnimationButton.animationBorderColor = UIColor.MediumTurquoise()
         self.borderWithLightAnimationButton.addTarget(self, action: "borderWithLightAnimation:", forControlEvents: .TouchUpInside)
         self.borderWithLightAnimationButton.syButtonAnimation = .BorderWithLight
         self.view.addSubview(self.borderWithLightAnimationButton)
@@ -56,6 +57,7 @@ class ViewController: UIViewController {
         self.backgroundAnimationButton.frame = CGRectMake(120, 170, 150, 40)
         self.backgroundAnimationButton.setTitle("Background", forState: .Normal)
         self.backgroundAnimationButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
+        self.backgroundAnimationButton.animationBackgroundColor = UIColor.RebeccaPurple()
         self.backgroundAnimationButton.buttonColor = UIColor.clearColor()
         self.backgroundAnimationButton.addTarget(self, action: "backgroundAnimation:", forControlEvents: .TouchUpInside)
         self.backgroundAnimationButton.syButtonAnimation = .Background
@@ -65,6 +67,7 @@ class ViewController: UIViewController {
         self.textAnimationButton.setTitle("Text", forState: .Normal)
         self.textAnimationButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
         self.textAnimationButton.buttonColor = UIColor.AliceBlue()
+        self.textAnimationButton.animationTextColor = UIColor.Wistful()
         self.textAnimationButton.addTarget(self, action: "textAnimation:", forControlEvents: .TouchUpInside)
         self.textAnimationButton.syButtonAnimation = .Text
         self.view.addSubview(self.textAnimationButton)

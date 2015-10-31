@@ -33,6 +33,18 @@ public class SYButton: UIButton {
         }
     }
     
+    public var animationBackgroundColor = UIColor.blackColor() {
+        didSet {
+            self.syLayer.animationBackgroundColor = self.animationBackgroundColor
+        }
+    }
+    
+    public var animationTextColor = UIColor.blackColor() {
+        didSet {
+            self.syLayer.animationTextColor = self.animationTextColor
+        }
+    }
+    
     public lazy var syLayer: SYLayer = SYLayer(superLayer: self.layer)
     
     override public func setTitle(title: String?, forState state: UIControlState) {

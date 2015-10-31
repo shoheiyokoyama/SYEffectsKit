@@ -32,7 +32,7 @@ public class SYLayer {
     public var animationBorderColor = UIColor.blackColor() {
         didSet {
             self.borderColorAnimtion.toValue = self.animationBorderColor.CGColor
-            self.animationShadowColor = animationBorderColor
+            self.animationShadowColor = self.animationBorderColor
         }
     }
     public var animationTextColor = UIColor.redColor() {
@@ -48,6 +48,11 @@ public class SYLayer {
     public var animationShadowColor = UIColor.blackColor() {
         didSet {
             self.superLayer.shadowColor = self.animationShadowColor.CGColor
+        }
+    }
+    
+    public var animationRippleColor = UIColor.lightGrayColor() {
+        didSet {
         }
     }
     
@@ -112,7 +117,7 @@ public class SYLayer {
         let rippleDiameter: CGFloat = superLayerHeight * 0.75
         let rippleCornerRadius: CGFloat = rippleDiameter / 2
         
-        self.rippleLayer.backgroundColor = UIColor.lightGrayColor().CGColor
+        self.rippleLayer.backgroundColor = self.animationRippleColor.CGColor
         self.rippleLayer.opacity = 0.0
         self.rippleLayer.cornerRadius = rippleCornerRadius
         self.rippleLayer.frame = CGRect(x: (self.superLayer.bounds.width - rippleDiameter) / 2, y: (self.superLayer.bounds.height - rippleDiameter) / 2, width: rippleDiameter, height: rippleDiameter)
@@ -121,7 +126,7 @@ public class SYLayer {
         let subRippleDiameter: CGFloat = superLayerHeight * 0.85
         let subRippleCornerRadius: CGFloat = subRippleDiameter / 2
         
-        self.subRippleLayer.borderColor = UIColor.lightGrayColor().CGColor
+        self.subRippleLayer.borderColor = self.animationRippleColor.CGColor
         self.subRippleLayer.opacity = 0.0
         self.subRippleLayer.borderWidth = 1
         self.subRippleLayer.backgroundColor = UIColor.clearColor().CGColor
