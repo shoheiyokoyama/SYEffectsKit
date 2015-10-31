@@ -9,15 +9,28 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    let button = SYButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        self.setup()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+    }
+    
+    private func setup() {
+        self.view.backgroundColor = UIColor.whiteColor()
+        
+        button.frame = CGRectMake(90, 500, 170, 50)
+        button.backgroundColor = UIColor.blueColor()
+        button.setTitle("TEXT", forState: .Normal)
+        button.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        self.view.addSubview(button)
     }
 
 
