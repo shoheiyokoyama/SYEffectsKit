@@ -31,6 +31,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
     let borderAnimationTextField = SYTextField()
     let borderWithLightAnimationTextField = SYTextField()
     let rippleWithLightAnimationTextField = SYTextField()
+    
+    let isTextTextField = SYTextField()
+    let isNotTextTextField = SYTextField()
+    let isCheckButton = SYButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +51,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.view.backgroundColor = UIColor.whiteColor()
         
         self.borderAnimationButton.frame = CGRectMake(10, 30, 150, 40)
-        self.borderAnimationButton.setTitle("Border", forState: .Normal)
+        self.borderAnimationButton.setTitle("Tap Border", forState: .Normal)
         self.borderAnimationButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
         self.borderAnimationButton.buttonColor = UIColor.clearColor()
         self.borderAnimationButton.animationBorderColor = UIColor.SunsetOrange()
@@ -55,8 +59,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.borderAnimationButton.syButtonAnimation = .Border
         self.view.addSubview(self.borderAnimationButton)
         
-        self.borderWithLightAnimationButton.frame = CGRectMake(170, 30, 150, 40)
-        self.borderWithLightAnimationButton.setTitle("BorderWithLight", forState: .Normal)
+        self.borderWithLightAnimationButton.frame = CGRectMake(170, 30, 200, 40)
+        self.borderWithLightAnimationButton.setTitle("Tap BorderWithLight", forState: .Normal)
         self.borderWithLightAnimationButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
         self.borderWithLightAnimationButton.buttonColor = UIColor.clearColor()
         self.borderWithLightAnimationButton.animationBorderColor = UIColor.MediumTurquoise()
@@ -65,7 +69,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.view.addSubview(self.borderWithLightAnimationButton)
         
         self.backgroundAnimationButton.frame = CGRectMake(10, 80, 150, 40)
-        self.backgroundAnimationButton.setTitle("Background", forState: .Normal)
+        self.backgroundAnimationButton.setTitle("Tap Background", forState: .Normal)
         self.backgroundAnimationButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
         self.backgroundAnimationButton.animationBackgroundColor = UIColor.RebeccaPurple()
         self.backgroundAnimationButton.buttonColor = UIColor.clearColor()
@@ -74,7 +78,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.view.addSubview(self.backgroundAnimationButton)
         
         self.textAnimationButton.frame = CGRectMake(170, 80, 150, 40)
-        self.textAnimationButton.setTitle("Text", forState: .Normal)
+        self.textAnimationButton.setTitle("Tap Text", forState: .Normal)
         self.textAnimationButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
         self.textAnimationButton.buttonColor = UIColor.AliceBlue()
         self.textAnimationButton.animationTextColor = UIColor.Wistful()
@@ -83,7 +87,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.view.addSubview(self.textAnimationButton)
         
         self.rippleAnimationButton.frame = CGRectMake(10, 150, 150, 40)
-        self.rippleAnimationButton.setTitle("Ripple", forState: .Normal)
+        self.rippleAnimationButton.setTitle("Tap Ripple", forState: .Normal)
         self.rippleAnimationButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
         self.rippleAnimationButton.buttonColor = UIColor.AquaIsland()
         self.rippleAnimationButton.addTarget(self, action: "rippleAnimation:", forControlEvents: .TouchUpInside)
@@ -91,21 +95,21 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.view.addSubview(self.rippleAnimationButton)
         
         self.textAnimationLabel.frame = CGRectMake(40, 200, 100, 40)
-        self.textAnimationLabel.text = "LABEL TEXT"
+        self.textAnimationLabel.text = "Label TEXT"
         self.textAnimationLabel.animationTextColor = UIColor.WaxFlower()
         self.textAnimationLabel.syLabelAnimation = .Text
         self.textAnimationLabel.startAnimation()
         self.view.addSubview(textAnimationLabel)
         
         self.backgroundAnimationLabel.frame = CGRectMake(200, 200, 170, 40)
-        self.backgroundAnimationLabel.text = "LABEL Background"
+        self.backgroundAnimationLabel.text = "Label Background"
         self.backgroundAnimationLabel.animationBackgroundColor = UIColor.SanMarino()
         self.backgroundAnimationLabel.syLabelAnimation = .Background
         self.backgroundAnimationLabel.startAnimation()
         self.view.addSubview(self.backgroundAnimationLabel)
         
         self.borderAnimationLabel.frame = CGRectMake(20, 250, 140, 40)
-        self.borderAnimationLabel.text = "LABEL Border"
+        self.borderAnimationLabel.text = "Label Border"
         self.borderAnimationLabel.layer.cornerRadius = 5.0 // TODO
         self.borderAnimationLabel.animationBorderColor = UIColor.SanMarino()
         self.borderAnimationLabel.syLabelAnimation = .Border
@@ -142,6 +146,31 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.rippleWithLightAnimationTextField.startAnimation()
         self.view.addSubview(rippleWithLightAnimationTextField)
         
+        
+        self.isTextTextField.frame = CGRectMake(20, 450, 150, 40)
+        self.isTextTextField.delegate = self
+        self.isTextTextField.text = "input text"
+        self.isTextTextField.syTextFieldAnimation = .Border
+        self.isTextTextField.animationRippleColor = UIColor.AliceBlue()
+        self.view.addSubview(isTextTextField)
+        
+        self.isNotTextTextField.frame = CGRectMake(200, 450, 150, 40)
+        self.isNotTextTextField.delegate = self
+        self.isNotTextTextField.placeholder = "not input text"
+        self.isNotTextTextField.animationBorderColor = UIColor.Razzmatazz()
+        self.isNotTextTextField.syTextFieldAnimation = .Border
+        self.isNotTextTextField.animationRippleColor = UIColor.AliceBlue()
+        self.view.addSubview(isNotTextTextField)
+        
+        self.isCheckButton.frame = CGRectMake(40, 550, 300, 40)
+        self.isCheckButton.setTitle("Check Text!!", forState: .Normal)
+        self.isCheckButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        self.isCheckButton.buttonColor = UIColor.AliceBlue()
+        self.isCheckButton.animationTextColor = UIColor.CreamCan()
+        self.isCheckButton.addTarget(self, action: "checkText:", forControlEvents: .TouchUpInside)
+        self.isCheckButton.syButtonAnimation = .Text
+        self.isCheckButton.startAnimation()
+        self.view.addSubview(self.isCheckButton)
     }
     
     internal func borderAnimation(sender: SYButton) {
@@ -196,6 +225,21 @@ class ViewController: UIViewController, UITextFieldDelegate {
         } else {
             self.rippleAnimationButton.stopAnimation()
             isRippleAnimating = false
+        }
+    }
+    
+    internal func checkText(sender: SYButton) {
+        self.isCheckButton.stopAnimation()
+        
+        
+        
+        if self.isTextTextField.text?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).isEmpty == true {
+            isTextTextField.startAnimation()
+        }
+        
+        if self.isNotTextTextField.text?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).isEmpty == true {
+            isNotTextTextField.startAnimation()
+            
         }
     }
     

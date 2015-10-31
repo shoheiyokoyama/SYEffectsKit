@@ -147,6 +147,4 @@ public class SYButton: UIButton {
     public func stopAnimation() {
         self.syLayer.stopAnimation()
     }
-    
-    
 }
