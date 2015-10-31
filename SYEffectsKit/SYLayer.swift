@@ -53,6 +53,8 @@ public class SYLayer {
     
     public var animationRippleColor = UIColor.lightGrayColor() {
         didSet {
+            self.rippleLayer.backgroundColor = self.animationRippleColor.CGColor
+            self.subRippleLayer.borderColor = self.animationRippleColor.CGColor
         }
     }
     

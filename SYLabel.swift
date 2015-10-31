@@ -1,5 +1,5 @@
 //
-//  SYButton.swift
+//  SYLabel.swift
 //  SYEffectsKit
 //
 //  Created by Shohei Yokoyama on 2015/10/31.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-public enum SYButtonAnimation {
+public enum SYLabelAnimation {
     case Border
     case BorderWithLight
     case Background
@@ -16,14 +16,14 @@ public enum SYButtonAnimation {
     case Ripple
 }
 
-public class SYButton: UIButton {
-    
+public class SYLabel: UILabel {
+
     private let textLayer = CATextLayer()
     
-    public var buttonColor: UIColor = UIColor.clearColor() {
+    public var labelColor: UIColor = UIColor.clearColor() {
         didSet {
             self.backgroundColor = UIColor.clearColor()
-            self.syLayer.backgroundColor = buttonColor
+            self.syLayer.backgroundColor = labelColor
         }
     }
     
@@ -45,23 +45,10 @@ public class SYButton: UIButton {
         }
     }
     
-    public var textColor = UIColor()
-    
-    public lazy var syLayer: SYLayer = SYLayer(superLayer: self.layer)
-    
-    override public func setTitle(title: String?, forState state: UIControlState) {
-        super.setTitle(title, forState: state)
-        
-        self.setTitleColor(UIColor.clearColor(), forState: state)
-        self.setTextLayer()
-    }
-    
-    override public func setTitleColor(color: UIColor?, forState state: UIControlState) {
-        super.setTitleColor(UIColor.clearColor(), forState: state)
-        
-        self.textLayer.foregroundColor = color?.CGColor
-        self.syLayer.textColor = color!
-        self.textColor = color!
+    public var animationRippleColor = UIColor.blackColor() {
+        didSet {
+            self.syLayer.animationRippleColor = self.animationRippleColor
+        }
     }
     
     override public var frame: CGRect {
@@ -69,6 +56,19 @@ public class SYButton: UIButton {
             self.syLayer.resizeSuperLayer(self.frame)
         }
     }
+    
+    override public var text: String? {
+        didSet {
+            self.textLayer.string = text
+            self.setTextLayer(text!)
+        }
+    }
+    
+//    override public var textColor = UIColor! {
+//        
+//    }
+    
+    public lazy var syLayer: SYLayer = SYLayer(superLayer: self.layer)
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -81,21 +81,17 @@ public class SYButton: UIButton {
     }
     
     private func setLayer() {
-        self.layer.cornerRadius = 5.0
-        self.contentEdgeInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
-        
-        self.textColor = UIColor.blackColor()
-        
-        self.syLayer.syLayerAnimation = .Ripple // Default Animation
+        self.textColor = UIColor.clearColor()
+        self.syLayer.syLayerAnimation = .Border // Default Animation
     }
     
-    private func setTextLayer() {
+    private func setTextLayer(text: String) {
         let font = UIFont.systemFontOfSize(17.0)
-        let text = self.currentTitle
+        let text = text
         
         var attributes = [String: AnyObject]()
         attributes[NSFontAttributeName] = font
-        let size = text!.sizeWithAttributes(attributes)
+        let size = text.sizeWithAttributes(attributes)
         
         let x = (CGRectGetWidth(self.frame) - size.width) / 2
         let y = (CGRectGetHeight(self.frame) - size.height) / 2
@@ -103,11 +99,11 @@ public class SYButton: UIButton {
         let width = size.width
         let frame = CGRectMake(x, y, width, height)
         
-        self.textLayer.font = self.titleLabel?.font
+        self.textLayer.font = self.font
         self.textLayer.string = text
         self.textLayer.fontSize = font.pointSize
         
-        self.textLayer.foregroundColor = self.textColor.CGColor
+        self.textLayer.foregroundColor = UIColor.blackColor().CGColor
         self.textLayer.contentsScale = UIScreen.mainScreen().scale
         
         self.textLayer.frame = frame
@@ -116,9 +112,9 @@ public class SYButton: UIButton {
         self.syLayer.setTextLayer(textLayer)
     }
     
-    public var syButtonAnimation: SYButtonAnimation = .Border {
+    public var syLabelAnimation: SYLabelAnimation = .Border {
         didSet {
-            switch syButtonAnimation {
+            switch syLabelAnimation {
             case .Border:
                 self.syLayer.syLayerAnimation = .Border
             case .BorderWithLight:
@@ -133,7 +129,6 @@ public class SYButton: UIButton {
         }
     }
     
-    
     public func startAnimation() {
         self.syLayer.startAnimation()
     }
@@ -141,6 +136,4 @@ public class SYButton: UIButton {
     public func stopAnimation() {
         self.syLayer.stopAnimation()
     }
-    
-    
 }

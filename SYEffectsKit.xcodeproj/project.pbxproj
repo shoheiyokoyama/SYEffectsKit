@@ -17,6 +17,8 @@
 		6D8FD4101BE4616400D9BBCC /* SYLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8FD40F1BE4616400D9BBCC /* SYLayer.swift */; settings = {ASSET_TAGS = (); }; };
 		6D8FD4121BE4617B00D9BBCC /* SYButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8FD4111BE4617B00D9BBCC /* SYButton.swift */; settings = {ASSET_TAGS = (); }; };
 		6D8FD4141BE49AD200D9BBCC /* SYColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8FD4131BE49AD200D9BBCC /* SYColor.swift */; settings = {ASSET_TAGS = (); }; };
+		6D8FD4161BE4A71900D9BBCC /* SYLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8FD4151BE4A71900D9BBCC /* SYLabel.swift */; settings = {ASSET_TAGS = (); }; };
+		6D8FD4181BE4B1DA00D9BBCC /* SYTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8FD4171BE4B1DA00D9BBCC /* SYTextField.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		6D8FD40F1BE4616400D9BBCC /* SYLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SYLayer.swift; sourceTree = "<group>"; };
 		6D8FD4111BE4617B00D9BBCC /* SYButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SYButton.swift; sourceTree = "<group>"; };
 		6D8FD4131BE49AD200D9BBCC /* SYColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SYColor.swift; sourceTree = "<group>"; };
+		6D8FD4151BE4A71900D9BBCC /* SYLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SYLabel.swift; path = ../SYLabel.swift; sourceTree = "<group>"; };
+		6D8FD4171BE4B1DA00D9BBCC /* SYTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SYTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +109,8 @@
 			children = (
 				6D8FD3E11BE45F6600D9BBCC /* AppDelegate.swift */,
 				6D8FD3E31BE45F6600D9BBCC /* ViewController.swift */,
+				6D8FD4171BE4B1DA00D9BBCC /* SYTextField.swift */,
+				6D8FD4151BE4A71900D9BBCC /* SYLabel.swift */,
 				6D8FD4131BE49AD200D9BBCC /* SYColor.swift */,
 				6D8FD40F1BE4616400D9BBCC /* SYLayer.swift */,
 				6D8FD4111BE4617B00D9BBCC /* SYButton.swift */,
@@ -265,9 +271,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D8FD4141BE49AD200D9BBCC /* SYColor.swift in Sources */,
+				6D8FD4181BE4B1DA00D9BBCC /* SYTextField.swift in Sources */,
 				6D8FD3E41BE45F6600D9BBCC /* ViewController.swift in Sources */,
 				6D8FD4121BE4617B00D9BBCC /* SYButton.swift in Sources */,
 				6D8FD3E21BE45F6600D9BBCC /* AppDelegate.swift in Sources */,
+				6D8FD4161BE4A71900D9BBCC /* SYLabel.swift in Sources */,
 				6D8FD4101BE4616400D9BBCC /* SYLayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -493,6 +501,7 @@
 				6D8FD4081BE45F6600D9BBCC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6D8FD4091BE45F6600D9BBCC /* Build configuration list for PBXNativeTarget "SYEffectsKitTests" */ = {
 			isa = XCConfigurationList;
@@ -501,6 +510,7 @@
 				6D8FD40B1BE45F6600D9BBCC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6D8FD40C1BE45F6600D9BBCC /* Build configuration list for PBXNativeTarget "SYEffectsKitUITests" */ = {
 			isa = XCConfigurationList;
@@ -509,6 +519,7 @@
 				6D8FD40E1BE45F6600D9BBCC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

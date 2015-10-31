@@ -21,6 +21,12 @@ class ViewController: UIViewController {
     var isBackgroundAnimating: Bool = false
     var isTextAnimating: Bool = false
     var isRippleAnimating: Bool = false
+    
+    let backgroundAnimationLabel = SYLabel()
+    let textAnimationLabel = SYLabel()
+    let borderAnimationLabel = SYLabel()
+    let borderWithLightAnimationLabel = SYLabel()
+    let rippleAnimationLabel = SYLabel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,16 +42,16 @@ class ViewController: UIViewController {
     private func setup() {
         self.view.backgroundColor = UIColor.whiteColor()
         
-        self.borderAnimationButton.frame = CGRectMake(120, 70, 150, 40)
+        self.borderAnimationButton.frame = CGRectMake(10, 30, 150, 40)
         self.borderAnimationButton.setTitle("Border", forState: .Normal)
-        self.borderAnimationButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
+        self.borderAnimationButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
         self.borderAnimationButton.buttonColor = UIColor.clearColor()
         self.borderAnimationButton.animationBorderColor = UIColor.SunsetOrange()
         self.borderAnimationButton.addTarget(self, action: "borderAnimation:", forControlEvents: .TouchUpInside)
         self.borderAnimationButton.syButtonAnimation = .Border
         self.view.addSubview(self.borderAnimationButton)
         
-        self.borderWithLightAnimationButton.frame = CGRectMake(120, 120, 150, 40)
+        self.borderWithLightAnimationButton.frame = CGRectMake(170, 30, 150, 40)
         self.borderWithLightAnimationButton.setTitle("BorderWithLight", forState: .Normal)
         self.borderWithLightAnimationButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
         self.borderWithLightAnimationButton.buttonColor = UIColor.clearColor()
@@ -54,31 +60,67 @@ class ViewController: UIViewController {
         self.borderWithLightAnimationButton.syButtonAnimation = .BorderWithLight
         self.view.addSubview(self.borderWithLightAnimationButton)
         
-        self.backgroundAnimationButton.frame = CGRectMake(120, 170, 150, 40)
+        self.backgroundAnimationButton.frame = CGRectMake(10, 80, 150, 40)
         self.backgroundAnimationButton.setTitle("Background", forState: .Normal)
-        self.backgroundAnimationButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
+        self.backgroundAnimationButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
         self.backgroundAnimationButton.animationBackgroundColor = UIColor.RebeccaPurple()
         self.backgroundAnimationButton.buttonColor = UIColor.clearColor()
         self.backgroundAnimationButton.addTarget(self, action: "backgroundAnimation:", forControlEvents: .TouchUpInside)
         self.backgroundAnimationButton.syButtonAnimation = .Background
         self.view.addSubview(self.backgroundAnimationButton)
         
-        self.textAnimationButton.frame = CGRectMake(120, 220, 150, 40)
+        self.textAnimationButton.frame = CGRectMake(170, 80, 150, 40)
         self.textAnimationButton.setTitle("Text", forState: .Normal)
-        self.textAnimationButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
+        self.textAnimationButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
         self.textAnimationButton.buttonColor = UIColor.AliceBlue()
         self.textAnimationButton.animationTextColor = UIColor.Wistful()
         self.textAnimationButton.addTarget(self, action: "textAnimation:", forControlEvents: .TouchUpInside)
         self.textAnimationButton.syButtonAnimation = .Text
         self.view.addSubview(self.textAnimationButton)
         
-        self.rippleAnimationButton.frame = CGRectMake(120, 270, 150, 40)
+        self.rippleAnimationButton.frame = CGRectMake(10, 150, 150, 40)
         self.rippleAnimationButton.setTitle("Ripple", forState: .Normal)
-        self.rippleAnimationButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
+        self.rippleAnimationButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
         self.rippleAnimationButton.buttonColor = UIColor.AquaIsland()
         self.rippleAnimationButton.addTarget(self, action: "rippleAnimation:", forControlEvents: .TouchUpInside)
         self.rippleAnimationButton.syButtonAnimation = .Ripple
         self.view.addSubview(self.rippleAnimationButton)
+        
+        self.textAnimationLabel.frame = CGRectMake(40, 200, 100, 40)
+        self.textAnimationLabel.text = "LABEL TEXT"
+        self.textAnimationLabel.animationTextColor = UIColor.WaxFlower()
+        self.textAnimationLabel.syLabelAnimation = .Text
+        self.textAnimationLabel.startAnimation()
+        self.view.addSubview(textAnimationLabel)
+        
+        self.backgroundAnimationLabel.frame = CGRectMake(200, 200, 170, 40)
+        self.backgroundAnimationLabel.text = "LABEL Background"
+        self.backgroundAnimationLabel.animationBackgroundColor = UIColor.SanMarino()
+        self.backgroundAnimationLabel.syLabelAnimation = .Background
+        self.backgroundAnimationLabel.startAnimation()
+        self.view.addSubview(self.backgroundAnimationLabel)
+        
+        self.borderAnimationLabel.frame = CGRectMake(20, 250, 140, 40)
+        self.borderAnimationLabel.text = "LABEL Border"
+        self.borderAnimationLabel.animationBorderColor = UIColor.SanMarino()
+        self.borderAnimationLabel.syLabelAnimation = .Border
+        self.borderAnimationLabel.startAnimation()
+        self.view.addSubview(self.borderAnimationLabel)
+        
+        self.borderWithLightAnimationLabel.frame = CGRectMake(180, 150, 190, 40)
+        self.borderWithLightAnimationLabel.text = "Label BorderWithLight"
+        self.borderWithLightAnimationLabel.animationBorderColor = UIColor.SanMarino()
+        self.borderWithLightAnimationLabel.syLabelAnimation = .BorderWithLight
+        self.borderWithLightAnimationLabel.startAnimation()
+        self.view.addSubview(self.borderWithLightAnimationLabel)
+        
+        self.rippleAnimationLabel.frame = CGRectMake(180, 250, 190, 40)
+        self.rippleAnimationLabel.text = "Label Ripple"
+        self.rippleAnimationLabel.labelColor = UIColor.Snuff()
+        self.rippleAnimationLabel.animationRippleColor = UIColor.ChestnutRose()
+        self.rippleAnimationLabel.syLabelAnimation = .Ripple
+        self.rippleAnimationLabel.startAnimation()
+        self.view.addSubview(self.rippleAnimationLabel)
     }
     
     internal func borderAnimation(sender: SYButton) {
