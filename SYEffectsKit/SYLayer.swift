@@ -60,7 +60,7 @@ public class SYLayer {
     
     public var animationDuration: CFTimeInterval = 1.0
     
-    public var textColor = UIColor()
+    public var textColor = UIColor.blackColor()
     public var backgroundColor = UIColor.clearColor() {
         didSet {
             self.superLayer.backgroundColor = self.backgroundColor.CGColor

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
     
     let borderAnimationButton = SYButton()
     let borderWithLightAnimationButton = SYButton()
@@ -27,6 +27,10 @@ class ViewController: UIViewController {
     let borderAnimationLabel = SYLabel()
     let borderWithLightAnimationLabel = SYLabel()
     let rippleAnimationLabel = SYLabel()
+    
+    let borderAnimationTextField = SYTextField()
+    let borderWithLightAnimationTextField = SYTextField()
+    let rippleWithLightAnimationTextField = SYTextField()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,6 +106,7 @@ class ViewController: UIViewController {
         
         self.borderAnimationLabel.frame = CGRectMake(20, 250, 140, 40)
         self.borderAnimationLabel.text = "LABEL Border"
+        self.borderAnimationLabel.layer.cornerRadius = 5.0 // TODO
         self.borderAnimationLabel.animationBorderColor = UIColor.SanMarino()
         self.borderAnimationLabel.syLabelAnimation = .Border
         self.borderAnimationLabel.startAnimation()
@@ -109,6 +114,7 @@ class ViewController: UIViewController {
         
         self.borderWithLightAnimationLabel.frame = CGRectMake(180, 150, 190, 40)
         self.borderWithLightAnimationLabel.text = "Label BorderWithLight"
+        self.borderWithLightAnimationLabel.layer.cornerRadius = 5.0 // TODO
         self.borderWithLightAnimationLabel.animationBorderColor = UIColor.SanMarino()
         self.borderWithLightAnimationLabel.syLabelAnimation = .BorderWithLight
         self.borderWithLightAnimationLabel.startAnimation()
@@ -121,6 +127,21 @@ class ViewController: UIViewController {
         self.rippleAnimationLabel.syLabelAnimation = .Ripple
         self.rippleAnimationLabel.startAnimation()
         self.view.addSubview(self.rippleAnimationLabel)
+        
+        self.borderAnimationTextField.frame = CGRectMake(20, 300, 150, 40)
+        self.borderAnimationTextField.delegate = self
+        self.borderAnimationTextField.syTextFieldAnimation = .Border
+        self.borderAnimationTextField.animationBorderColor = UIColor.ChestnutRose()
+        self.borderAnimationTextField.startAnimation()
+        self.view.addSubview(borderAnimationTextField)
+        
+        self.rippleWithLightAnimationTextField.frame = CGRectMake(200, 300, 150, 40)
+        self.rippleWithLightAnimationTextField.delegate = self
+        self.rippleWithLightAnimationTextField.syTextFieldAnimation = .Ripple
+        self.rippleWithLightAnimationTextField.animationRippleColor = UIColor.AliceBlue()
+        self.rippleWithLightAnimationTextField.startAnimation()
+        self.view.addSubview(rippleWithLightAnimationTextField)
+        
     }
     
     internal func borderAnimation(sender: SYButton) {
@@ -176,6 +197,13 @@ class ViewController: UIViewController {
             self.rippleAnimationButton.stopAnimation()
             isRippleAnimating = false
         }
+    }
+    
+    //MARK: - UITextFieldDelegate
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        
+        return true
     }
 
 

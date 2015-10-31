@@ -45,6 +45,12 @@ public class SYButton: UIButton {
         }
     }
     
+    public var animationRippleColor = UIColor.blackColor() {
+        didSet {
+            self.syLayer.animationRippleColor = self.animationRippleColor
+        }
+    }
+    
     public var textColor = UIColor()
     
     public lazy var syLayer: SYLayer = SYLayer(superLayer: self.layer)
